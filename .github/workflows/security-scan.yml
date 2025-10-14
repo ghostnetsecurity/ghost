@@ -96,7 +96,7 @@ jobs:
               title: `🚨 SECURITY ALERT: ${domain} - Risk Score ${riskScore}/100`,
               body: `## GhostNet Security Intelligence Report
               
-**Enterprise:** ${company}  
+**Enterprise:** ${company}   
 **Domain:** ${domain}  
 **Assessment Date:** ${new Date().toISOString()}
               
