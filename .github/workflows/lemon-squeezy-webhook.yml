@@ -1,0 +1,128 @@
+name: 🍋 Lemon Squeezy Webhook Handler
+
+on:
+  repository_dispatch:
+    types: [lemon_webhook]
+  workflow_dispatch:
+
+jobs:
+  process-payment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛠️ Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: 📊 Process Lemon Squeezy Event
+        run: |
+          EVENT_TYPE="${{ github.event.client_payload.event_name }}"
+          ORDER_NUMBER="${{ github.event.client_payload.data.attributes.order_number }}"
+          CUSTOMER_EMAIL="${{ github.event.client_payload.data.attributes.user_email }}"
+          PRODUCT_NAME="${{ github.event.client_payload.data.attributes.product_name }}"
+          TOTAL="${{ github.event.client_payload.data.attributes.total }}"
+          
+          echo "Processing Lemon Squeezy Event: $EVENT_TYPE"
+          echo "Order: $ORDER_NUMBER"
+          echo "Customer: $CUSTOMER_EMAIL" 
+          echo "Product: $PRODUCT_NAME"
+          echo "Amount: $$TOTAL"
+          
+          # Handle different event types
+          case $EVENT_TYPE in
+            "order_created")
+              echo "🆕 New order created"
+              ;;
+            "subscription_created") 
+              echo "🔄 New subscription created"
+              ;;
+            "subscription_payment_success")
+              echo "💰 Subscription payment successful"
+              ;;
+            "order_refunded")
+              echo "↩️ Order refunded"
+              ;;
+          esac
+          
+          # Update customers database
+          if [ ! -f "customers.json" ]; then
+            echo '[]' > customers.json
+          fi
+          
+          # Add customer to database
+          jq --arg email "$CUSTOMER_EMAIL" \
+             --arg product "$PRODUCT_NAME" \
+             --arg total "$TOTAL" \
+             --arg order "$ORDER_NUMBER" \
+             --arg date "$(date -Iseconds)" \
+             '. + [{
+               "customer_email": $email,
+               "product": $product, 
+               "amount": $total,
+               "order_number": $order,
+               "signup_date": $date,
+               "status": "active"
+             }]' customers.json > temp.json && mv temp.json customers.json
+             
+          echo "✅ Customer added to database"
+
+      - name: 📈 Update Revenue Tracking
+        run: |
+          # Calculate total MRR from subscriptions
+          TOTAL_MRR=$(jq '[.[] | select(.product | contains("Platform") or contains("Insurance")) | .amount | tonumber] | add' customers.json 2>/dev/null || echo "0")
+          CUSTOMER_COUNT=$(jq 'length' customers.json)
+          
+          # Update revenue dashboard
+          cat > REVENUE.md << EOF
+          # 🍋 LEMON SQUEEZY REVENUE DASHBOARD
+          
+          ## LIVE METRICS
+          | Metric | Value |
+          |--------|-------|
+          | **Monthly MRR** | \$${TOTAL_MRR} |
+          | **Total Customers** | ${CUSTOMER_COUNT} |
+          | **Target MRR** | \$1,455,151 |
+          | **Progress** | $(echo "scale=2; ${TOTAL_MRR} * 100 / 1455151" | bc)% |
+          
+          ## RECENT ORDERS
+          $(jq -r '.[-5:] | reverse[] | "• \(.customer_email) - \(.product) - \$${.amount} - \(.signup_date)"' customers.json 2>/dev/null || echo "No orders yet")
+          
+          Last updated: $(date)
+          EOF
+          
+          echo "💰 Revenue updated: \$$TOTAL_MRR MRR"
+
+      - name: 🎉 Create Customer Welcome Issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const email = '${{ github.event.client_payload.data.attributes.user_email }}';
+            const product = '${{ github.event.client_payload.data.attributes.product_name }}';
+            const amount = '${{ github.event.client_payload.data.attributes.total }}';
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🎉 New Customer: ${email} - ${product}`,
+              body: `## NEW CUSTOMER SIGNUP
+              
+**Email:** ${email}  
+**Product:** ${product}  
+**Amount:** $${amount}  
+**Date:** ${new Date().toISOString()}
+              
+### NEXT STEPS:
+1. Send welcome email with platform access
+2. Activate security monitoring
+3. Assign dedicated security team
+4. Schedule initial security assessment
+              
+**Status:** Payment processed via Lemon Squeezy ✅`,
+              labels: ['new-customer', 'lemon-squeezy', 'revenue']
+            });
+
+      - name: 📤 Commit Updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "💰 Update revenue - New Lemon Squeezy customer"
+          git push
