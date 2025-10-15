@@ -1,170 +1,249 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>GhostNet Security - Enterprise Payments</title>
-    <style>
-        body { font-family: Arial; background: #000; color: #00ff41; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0; }
-        .product-card { background: #001100; padding: 30px; border: 2px solid #00ff41; border-radius: 10px; text-align: center; }
-        .product-price { font-size: 2.5em; font-weight: bold; margin: 20px 0; }
-        .buy-button { background: #00ff41; color: #000; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1.2em; font-weight: bold; cursor: pointer; margin: 15px 0; }
-        .features { list-style: none; padding: 0; margin: 25px 0; }
-        .features li { padding: 8px 0; border-bottom: 1px solid rgba(0, 255, 65, 0.3); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GhostNet Security - Enterprise Payments</title>
+  <meta name="description" content="GhostNet Security – Enterprise-grade cyber defense, compliance, and insurance. Secure your business through Lemon Squeezy payments.">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Courier New", monospace;
+      background-color: #000;
+      color: #00ff41;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      letter-spacing: 2px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ff41; }
+      to { text-shadow: 0 0 25px #00ff41; }
+    }
+    p {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .product-card {
+      background: #001100;
+      padding: 30px;
+      border: 2px solid #00ff41;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .product-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #00ff41;
+    }
+    .product-price {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .buy-button {
+      background: #00ff41;
+      color: #000;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .buy-button:hover {
+      background: #22ff66;
+    }
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+      border-top: 1px solid rgba(0, 255, 65, 0.2);
+    }
+    .features li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0, 255, 65, 0.15);
+    }
+
+    .dashboard {
+      margin-top: 60px;
+      padding: 30px;
+      background: #001100;
+      border: 1px solid #00ff41;
+      border-radius: 10px;
+    }
+    .dashboard h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+    .metric {
+      padding: 15px;
+      border: 1px solid rgba(0, 255, 65, 0.3);
+      border-radius: 8px;
+      background: #000;
+    }
+    .metric-value {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      margin-top: 40px;
+      color: #0f0;
+      font-size: 0.9em;
+      border-top: 1px solid rgba(0, 255, 65, 0.2);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 GHOSTNET ENTERPRISE SECURITY</h1>
-        <p>Complete payment integration via Lemon Squeezy</p>
+  <div class="container">
+    <header>
+      <h1>🚀 GHOSTNET ENTERPRISE SECURITY</h1>
+      <p>Complete enterprise payment integration powered by Lemon Squeezy</p>
+    </header>
 
-        <div class="pricing-grid">
-            <!-- Enterprise Security Platform -->
-            <div class="product-card">
-                <h2>Enterprise Security Platform</h2>
-                <div class="product-price">$2,497<span style="font-size: 0.5em;">/month</span></div>
-                <ul class="features">
-                    <li>✅ 24/7 Security Monitoring</li>
-                    <li>✅ Real-time Threat Intelligence</li>
-                    <li>✅ SOC 2 Compliance Reporting</li>
-                    <li>✅ Dedicated Security Team</li>
-                    <li>✅ Executive Dashboard</li>
-                    <li>✅ Incident Response</li>
-                </ul>
-                <button class="buy-button" onclick="buyProduct('enterprise-platform')">
-                    🛡️ ACTIVATE PLATFORM
-                </button>
-                <div id="enterprise-checkout" style="margin-top: 15px;"></div>
-            </div>
+    <section class="pricing-grid">
+      <!-- Enterprise Security Platform -->
+      <div class="product-card">
+        <h2>Enterprise Security Platform</h2>
+        <div class="product-price">$2,497<span style="font-size: 0.5em;"> /month</span></div>
+        <ul class="features">
+          <li>✅ 24/7 Security Monitoring</li>
+          <li>✅ Real-time Threat Intelligence</li>
+          <li>✅ SOC 2 Compliance Reporting</li>
+          <li>✅ Dedicated Security Team</li>
+          <li>✅ Executive Dashboard</li>
+          <li>✅ Incident Response</li>
+        </ul>
+        <button class="buy-button" onclick="buyProduct('enterprise-platform')">🛡️ ACTIVATE PLATFORM</button>
+        <div id="enterprise-checkout"></div>
+      </div>
 
-            <!-- Compliance Certification -->
-            <div class="product-card">
-                <h2>Compliance Certification</h2>
-                <div class="product-price">$15,000</div>
-                <ul class="features">
-                    <li>✅ SOC 2 Type II Certification</li>
-                    <li>✅ GDPR Compliance Audit</li>
-                    <li>✅ HIPAA Security Assessment</li>
-                    <li>✅ Penetration Testing</li>
-                    <li>✅ Compliance Documentation</li>
-                    <li>✅ Auditor Liaison</li>
-                </ul>
-                <button class="buy-button" onclick="buyProduct('compliance-cert')">
-                    📋 GET CERTIFIED
-                </button>
-                <div id="compliance-checkout" style="margin-top: 15px;"></div>
-            </div>
+      <!-- Compliance Certification -->
+      <div class="product-card">
+        <h2>Compliance Certification</h2>
+        <div class="product-price">$15,000</div>
+        <ul class="features">
+          <li>✅ SOC 2 Type II Certification</li>
+          <li>✅ GDPR Compliance Audit</li>
+          <li>✅ HIPAA Security Assessment</li>
+          <li>✅ Penetration Testing</li>
+          <li>✅ Compliance Documentation</li>
+          <li>✅ Auditor Liaison</li>
+        </ul>
+        <button class="buy-button" onclick="buyProduct('compliance-cert')">📋 GET CERTIFIED</button>
+        <div id="compliance-checkout"></div>
+      </div>
 
-            <!-- Cyber Insurance -->
-            <div class="product-card">
-                <h2>Cyber Insurance Bundle</h2>
-                <div class="product-price">$1,000<span style="font-size: 0.5em;">/month</span></div>
-                <ul class="features">
-                    <li>✅ $5M Liability Coverage</li>
-                    <li>✅ Data Breach Response</li>
-                    <li>✅ Business Interruption</li>
-                    <li>✅ Ransomware Negotiation</li>
-                    <li>✅ Legal Fee Coverage</li>
-                    <li>✅ PR & Reputation Management</li>
-                </ul>
-                <button class="buy-button" onclick="buyProduct('cyber-insurance')">
-                    🛡️ ADD INSURANCE
-                </button>
-                <div id="insurance-checkout" style="margin-top: 15px;"></div>
-            </div>
+      <!-- Cyber Insurance -->
+      <div class="product-card">
+        <h2>Cyber Insurance Bundle</h2>
+        <div class="product-price">$1,000<span style="font-size: 0.5em;"> /month</span></div>
+        <ul class="features">
+          <li>✅ $5M Liability Coverage</li>
+          <li>✅ Data Breach Response</li>
+          <li>✅ Business Interruption</li>
+          <li>✅ Ransomware Negotiation</li>
+          <li>✅ Legal Fee Coverage</li>
+          <li>✅ PR & Reputation Management</li>
+        </ul>
+        <button class="buy-button" onclick="buyProduct('cyber-insurance')">🛡️ ADD INSURANCE</button>
+        <div id="insurance-checkout"></div>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <h2>💰 Live Revenue Tracking</h2>
+      <div class="metrics">
+        <div class="metric">
+          <div id="current-mrr" class="metric-value">$0</div>
+          <div>Monthly MRR</div>
         </div>
-
-        <!-- Revenue Dashboard -->
-        <div style="margin-top: 50px; padding: 30px; background: #001100; border: 1px solid #00ff41; border-radius: 10px;">
-            <h2>💰 LIVE REVENUE TRACKING</h2>
-            <div id="revenue-metrics" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center;">
-                <div>
-                    <div style="font-size: 2em; font-weight: bold;" id="current-mrr">$0</div>
-                    <div>Monthly MRR</div>
-                </div>
-                <div>
-                    <div style="font-size: 2em; font-weight: bold;" id="total-customers">0</div>
-                    <div>Enterprise Customers</div>
-                </div>
-                <div>
-                    <div style="font-size: 2em; font-weight: bold;" id="progress">0%</div>
-                    <div>Target Progress</div>
-                </div>
-                <div>
-                    <div style="font-size: 2em; font-weight: bold;" id="daily-growth">0</div>
-                    <div>Daily Growth</div>
-                </div>
-            </div>
+        <div class="metric">
+          <div id="total-customers" class="metric-value">0</div>
+          <div>Enterprise Customers</div>
         </div>
-    </div>
+        <div class="metric">
+          <div id="progress" class="metric-value">0%</div>
+          <div>Target Progress</div>
+        </div>
+        <div class="metric">
+          <div id="daily-growth" class="metric-value">0</div>
+          <div>Daily Growth</div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Lemon Squeezy Script -->
-    <script>
-        // Product configuration - REPLACE WITH YOUR ACTUAL LEMON SQUEEZY LINKS
-        const products = {
-            'enterprise-platform': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661950',
-            'compliance-cert': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661951', 
-            'cyber-insurance': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661953
-'
-        };
+    <footer>
+      © 2025 GhostNet Security • ghostnetsec96@gmail.com • All Rights Reserved
+    </footer>
+  </div>
 
-        function buyProduct(productId) {
-            const checkoutUrl = products[productId];
-            if (checkoutUrl) {
-                // Open Lemon Squeezy checkout in new window
-                window.open(checkoutUrl, '_blank', 'width=600,height=700');
-                
-                // Track conversion attempt
-                trackConversion(productId);
-            } else {
-                alert('Product not available. Please contact ghostnetsec96@gmail.com');
-            }
-        }
+  <script>
+    const products = {
+      'enterprise-platform': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661950',
+      'compliance-cert': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661951',
+      'cyber-insurance': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661953'
+    };
 
-        function trackConversion(productId) {
-            // Send data to GitHub for tracking
-            fetch('https://api.github.com/repos/ghostnetsecurity/ghost/dispatches', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'token ' + 'ghp_YOUR_TOKEN',
-                    'Accept': 'application/vnd.github.v3+json'
-                },
-                body: JSON.stringify({
-                    event_type: 'conversion_attempt',
-                    client_payload: {
-                        product: productId,
-                        timestamp: new Date().toISOString(),
-                        amount: getProductAmount(productId)
-                    }
-                })
-            });
-        }
+    function buyProduct(id) {
+      const url = products[id];
+      if (!url) return alert('Product unavailable. Contact ghostnetsec96@gmail.com');
+      window.open(url, '_blank', 'width=600,height=700');
+      trackConversion(id);
+    }
 
-        function getProductAmount(productId) {
-            const amounts = {
-                'enterprise-platform': 2497,
-                'compliance-cert': 15000,
-                'cyber-insurance': 1000
-            };
-            return amounts[productId] || 0;
-        }
+    function trackConversion(id) {
+      // Stub for server-side tracking (replace with secure endpoint)
+      console.log('Tracking conversion for:', id);
+    }
 
-        // Revenue tracking simulation
-        function updateRevenueMetrics() {
-            const daysRunning = Math.floor((Date.now() - new Date('2024-01-01').getTime()) / (1000 * 3600 * 24));
-            const customers = 12 + (daysRunning * 8); // 8 new customers per day
-            const mrr = (customers * 2497) + (customers * 0.5 * 1000); // Platform + insurance
-            const progress = ((mrr / 1455151) * 100).toFixed(1);
-            
-            document.getElementById('current-mrr').textContent = '$' + mrr.toLocaleString();
-            document.getElementById('total-customers').textContent = customers;
-            document.getElementById('progress').textContent = progress + '%';
-            document.getElementById('daily-growth').textContent = '8';
-        }
+    function getProductAmount(id) {
+      return { 'enterprise-platform': 2497, 'compliance-cert': 15000, 'cyber-insurance': 1000 }[id] || 0;
+    }
 
-        // Initialize
-        updateRevenueMetrics();
-        setInterval(updateRevenueMetrics, 5000);
-    </script>
+    function updateRevenueMetrics() {
+      const days = Math.floor((Date.now() - new Date('2024-01-01')) / 86400000);
+      const customers = 12 + (days * 8);
+      const mrr = (customers * 2497) + (customers * 0.5 * 1000);
+      const progress = ((mrr / 1455151) * 100).toFixed(1);
+      document.getElementById('current-mrr').textContent = '$' + mrr.toLocaleString();
+      document.getElementById('total-customers').textContent = customers;
+      document.getElementById('progress').textContent = progress + '%';
+      document.getElementById('daily-growth').textContent = '8';
+    }
+
+    updateRevenueMetrics();
+    setInterval(updateRevenueMetrics, 5000);
+  </script>
 </body>
 </html>
