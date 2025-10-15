@@ -1,486 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GhostNet Security Intelligence</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Courier New', monospace; 
-            background: #000; 
-            color: #00ff41; 
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(0, 255, 65, 0.08) 0%, transparent 50%);
-            z-index: -1;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        .header {
-            text-align: center;
-            padding: 40px 0;
-            border-bottom: 1px solid #00ff41;
-            margin-bottom: 40px;
-        }
-        .header h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px #00ff41;
-        }
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.8;
-        }
-        .alert-banner {
-            background: linear-gradient(45deg, #ff0000, #ff4444);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            margin: 20px 0;
-            border-radius: 5px;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
-        .scan-section {
-            background: rgba(0, 30, 0, 0.8);
-            padding: 40px;
-            border: 1px solid #00ff41;
-            border-radius: 10px;
-            margin: 40px 0;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #00ff41;
-            color: #00ff41;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .btn {
-            background: linear-gradient(45deg, #00ff41, #00cc33);
-            color: black;
-            padding: 18px 36px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.4);
-        }
-        .btn-danger {
-            background: linear-gradient(45deg, #ff0000, #cc0000);
-            color: white;
-        }
-        .results {
-            display: none;
-            background: rgba(255, 0, 0, 0.1);
-            padding: 30px;
-            border: 2px solid #ff0000;
-            border-radius: 10px;
-            margin: 30px 0;
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
-        }
-        .pricing-card {
-            background: rgba(0, 30, 0, 0.9);
-            padding: 40px;
-            border: 2px solid #00ff41;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
-        }
-        .pricing-card h3 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-        .price {
-            font-size: 3em;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        .features {
-            list-style: none;
-            margin: 30px 0;
-        }
-        .features li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
-        }
-        .onboarding {
-            display: none;
-            background: rgba(0, 50, 0, 0.9);
-            padding: 40px;
-            border: 2px solid #00ff41;
-            border-radius: 10px;
-            margin: 40px 0;
-        }
-        .terminal {
-            background: #000;
-            border: 1px solid #00ff41;
-            border-radius: 5px;
-            padding: 20px;
-            font-family: 'Courier New', monospace;
-            margin: 20px 0;
-        }
-        .terminal-line {
-            margin: 5px 0;
-        }
-        .blink {
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GhostNet Security - Enterprise Payments</title>
+  <meta name="description" content="GhostNet Enterprise Security - Cyber Defense, Compliance Certification & Cyber Insurance. Secure your business today." />
+  <style>
+    /* === Global Styles === */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Courier New", monospace;
+      background-color: #000;
+      color: #00ff41;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* === Header === */
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ff41; }
+      to { text-shadow: 0 0 25px #00ff41; }
+    }
+
+    /* === Pricing Grid === */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .product-card {
+      background: #001100;
+      padding: 30px;
+      border: 2px solid #00ff41;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .product-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #00ff41;
+    }
+    .product-price {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .buy-button {
+      background: #00ff41;
+      color: #000;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .buy-button:hover {
+      background: #22ff66;
+    }
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+      border-top: 1px solid rgba(0, 255, 65, 0.2);
+    }
+    .features li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0, 255, 65, 0.15);
+    }
+
+    /* === Dashboard === */
+    .dashboard {
+      margin-top: 60px;
+      padding: 30px;
+      background: #001100;
+      border: 1px solid #00ff41;
+      border-radius: 10px;
+    }
+    .dashboard h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+    .metric {
+      padding: 15px;
+      border: 1px solid rgba(0, 255, 65, 0.3);
+      border-radius: 8px;
+      background: #000;
+    }
+    .metric-value {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      margin-top: 40px;
+      color: #0f0;
+      font-size: 0.9em;
+      border-top: 1px solid rgba(0, 255, 65, 0.2);
+    }
+  </style>
 </head>
 <body>
-    <div class="matrix-bg"></div>
-    
-    <div class="container">
-        <div class="header">
-            <h1>GHOSTNET SECURITY INTELLIGENCE</h1>
-            <p>Enterprise-Grade Threat Detection & Compliance Monitoring</p>
-        </div>
+  <div class="container">
+    <header>
+      <h1>🚀 GHOSTNET ENTERPRISE SECURITY</h1>
+      <p>Complete enterprise payment integration powered by Lemon Squeezy</p>
+    </header>
 
-        <div class="alert-banner">
-            ⚠️ MULTIPLE CRITICAL VULNERABILITIES DETECTED ACROSS ENTERPRISE NETWORKS - IMMEDIATE ACTION REQUIRED
-        </div>
-     <div class="header">
-    <h1>GHOSTNET SECURITY INTELLIGENCE</h1>
-    <p>Enterprise-Grade Threat Detection & Compliance Monitoring</p>
-    
-    <!-- ADD THIS PAYMENT BADGE -->
-    <div style="margin: 15px 0;">
-        <a href="lemonsqueezy.html" style="background: #8B5CF6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 25px; font-size: 0.9em; display: inline-block;">
-            🍋 SECURE PAYMENTS AVAILABLE
-        </a>
-    </div>
-</div>
-        <div class="scan-section">
-            <h2>REQUEST SECURITY AUDIT</h2>
-            <form id="auditForm">
-                <div class="form-group">
-                    <label for="company">COMPANY NAME</label>
-                    <input type="text" id="company" placeholder="Microsoft Corporation" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">SECURITY CONTACT EMAIL</label>
-                    <input type="email" id="email" placeholder="security@microsoft.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="domain">PRIMARY DOMAIN</label>
-                    <input type="text" id="domain" placeholder="microsoft.com" required>
-                </div>
-                <button type="submit" class="btn">🚀 INITIATE COMPREHENSIVE SECURITY SCAN</button>
-            </form>
-
-<!-- ADD THIS PAYMENT BUTTON -->
-<div style="text-align: center; margin: 30px 0;">
-    <a href="lemonsqueezy.html" class="btn" style="background: #8B5CF6; color: white; padding: 15px 30px; text-decoration: none; display: inline-block;">
-        🍋 SECURE PAYMENTS VIA LEMON SQUEEZY
-    </a>
-</div>
-        
-
-        <div id="results" class="results">
-            <h2>🔍 SECURITY AUDIT COMPLETE</h2>
-            <div class="terminal">
-                <div class="terminal-line">> INITIATING GHOSTNET SECURITY SCAN...</div>
-                <div class="terminal-line">> TARGET: <span id="targetDomain"></span></div>
-                <div class="terminal-line">> SCANNING PUBLIC INFRASTRUCTURE... <span style="color: #00ff41">COMPLETE</span></div>
-                <div class="terminal-line">> ANALYZING NETWORK CONFIGURATION... <span style="color: #00ff41">COMPLETE</span></div>
-                <div class="terminal-line">> CHECKING VULNERABILITY DATABASES... <span style="color: #00ff41">COMPLETE</span></div>
-                <div class="terminal-line">> ASSESSING COMPLIANCE STATUS... <span style="color: #00ff41">COMPLETE</span></div>
-                <div class="terminal-line">></div>
-                <div class="terminal-line" style="color: #ff0000">> 🚨 CRITICAL FINDINGS IDENTIFIED</div>
-                <div class="terminal-line" style="color: #ff0000">> RISK SCORE: <span id="riskScore">47</span>/100 - IMMEDIATE ACTION REQUIRED</div>
-                <div class="terminal-line" style="color: #ff0000">> CRITICAL ISSUES: <span id="criticalCount">3</span></div>
-                <div class="terminal-line" style="color: #ff0000">> COMPLIANCE VIOLATIONS: <span id="complianceCount">2</span></div>
-            </div>
-            <div id="findings" style="margin: 20px 0;"></div>
-            <button onclick="showPricing()" class="btn btn-danger">🛡️ ACTIVATE ENTERPRISE PROTECTION</button>
-        </div>
-            <!-- Add this RIGHT BEFORE the pricing grid -->
-<div style="text-align: center; margin: 40px 0;">
-    <h2>💳 ENTERPRISE PAYMENT OPTIONS</h2>
-    <a href="lemonsqueezy.html" class="btn" style="background: #8B5CF6; color: white; padding: 15px 30px; text-decoration: none; display: inline-block; margin: 15px;">
-        🍋 SECURE PAYMENTS VIA LEMON SQUEEZY
-    </a>
-    <p style="margin-top: 10px; opacity: 0.8;">Credit Cards • Apple Pay • Google Pay • Crypto</p>
-</div>
-
-<div id="pricing" class="pricing-grid">
-    <!-- your existing pricing cards -->
-
-        <!-- Payment Options Header -->
-<div style="text-align: center; margin: 50px 0 30px 0;">
-    <h2>🚀 ENTERPRISE SECURITY PLATFORMS</h2>
-    <div style="margin: 20px 0;">
-        <a href="lemonsqueezy.html" class="btn" style="background: #8B5CF6; color: white; padding: 15px 30px; text-decoration: none; display: inline-block; margin: 10px;">
-            🍋 SECURE INSTANT PAYMENTS
-        </a>
-    </div>
-    <p style="opacity: 0.8;">Credit Cards • Apple Pay • Google Pay • Crypto Accepted</p>
-</div>
-
-<div id="pricing" class="pricing-grid">
-    <div class="pricing-card">
-        <h3>ENTERPRISE SECURITY PLATFORM</h3>
-        <div class="price">$2,497<span style="font-size: 0.5em;">/month</span></div>
+    <section class="pricing-grid">
+      <!-- Enterprise Security Platform -->
+      <div class="product-card">
+        <h2>Enterprise Security Platform</h2>
+        <div class="product-price">$2,497<span style="font-size: 0.5em;"> /month</span></div>
         <ul class="features">
-            <li>✅ Continuous Vulnerability Monitoring</li>
-            <li>✅ Real-time Threat Intelligence</li>
-            <li>✅ 24/7 Security Operations Center</li>
-            <li>✅ Compliance Reporting (SOC2, GDPR, HIPAA)</li>
-            <li>✅ Incident Response & Forensics</li>
-            <li>✅ Executive Risk Dashboard</li>
-            <li>✅ Vendor Risk Management</li>
-            <li>✅ Cyber Insurance Integration</li>
+          <li>✅ 24/7 Security Monitoring</li>
+          <li>✅ Real-time Threat Intelligence</li>
+          <li>✅ SOC 2 Compliance Reporting</li>
+          <li>✅ Dedicated Security Team</li>
+          <li>✅ Executive Dashboard</li>
+          <li>✅ Incident Response</li>
         </ul>
-        <button onclick="startOnboarding('platform')" class="btn">🚀 ACTIVATE PLATFORM</button>
-        <div style="margin-top: 15px;">
-            <a href="lemonsqueezy.html" style="color: #8B5CF6; text-decoration: none; font-size: 0.9em;">
-                🍋 Pay instantly with credit card
-            </a>
+        <button class="buy-button" onclick="buyProduct('enterprise-platform')">🛡️ ACTIVATE PLATFORM</button>
+        <div id="enterprise-checkout"></div>
+      </div>
+
+      <!-- Compliance Certification -->
+      <div class="product-card">
+        <h2>Compliance Certification</h2>
+        <div class="product-price">$15,000</div>
+        <ul class="features">
+          <li>✅ SOC 2 Type II Certification</li>
+          <li>✅ GDPR Compliance Audit</li>
+          <li>✅ HIPAA Security Assessment</li>
+          <li>✅ Penetration Testing</li>
+          <li>✅ Compliance Documentation</li>
+          <li>✅ Auditor Liaison</li>
+        </ul>
+        <button class="buy-button" onclick="buyProduct('compliance-cert')">📋 GET CERTIFIED</button>
+        <div id="compliance-checkout"></div>
+      </div>
+
+      <!-- Cyber Insurance -->
+      <div class="product-card">
+        <h2>Cyber Insurance Bundle</h2>
+        <div class="product-price">$1,000<span style="font-size: 0.5em;"> /month</span></div>
+        <ul class="features">
+          <li>✅ $5M Liability Coverage</li>
+          <li>✅ Data Breach Response</li>
+          <li>✅ Business Interruption</li>
+          <li>✅ Ransomware Negotiation</li>
+          <li>✅ Legal Fee Coverage</li>
+          <li>✅ PR & Reputation Management</li>
+        </ul>
+        <button class="buy-button" onclick="buyProduct('cyber-insurance')">🛡️ ADD INSURANCE</button>
+        <div id="insurance-checkout"></div>
+      </div>
+    </section>
+
+    <!-- Live Revenue Dashboard -->
+    <section class="dashboard">
+      <h2>💰 Live Revenue Tracking</h2>
+      <div class="metrics">
+        <div class="metric">
+          <div id="current-mrr" class="metric-value">$0</div>
+          <div>Monthly MRR</div>
         </div>
-    </div>
-
-    <!-- Repeat similar payment links for other pricing cards -->
-</div>
-    
-            <div class="pricing-card">
-                <h3>COMPLIANCE CERTIFICATION</h3>
-                <div class="price">$5,000<span style="font-size: 0.5em;">/one-time</span></div>
-                <ul class="features">
-                    <li>✅ SOC 2 Type II Certification</li>
-                    <li>✅ GDPR Compliance Audit</li>
-                    <li>✅ HIPAA Security Assessment</li>
-                    <li>✅ ISO 27001 Alignment</li>
-                    <li>✅ Penetration Testing Report</li>
-                    <li>✅ Compliance Documentation</li>
-                    <li>✅ Auditor Liaison Support</li>
-                    <li>✅ Certificate of Compliance</li>
-                </ul>
-                <button onclick="startOnboarding('compliance')" class="btn">📋 GET CERTIFIED</button>
-            </div>
-
-            <div class="pricing-card">
-                <h3>CYBER INSURANCE BUNDLE</h3>
-                <div class="price">$1,000<span style="font-size: 0.5em;">/month</span></div>
-                <ul class="features">
-                    <li>✅ $5M Cyber Liability Coverage</li>
-                    <li>✅ Data Breach Response</li>
-                    <li>✅ Business Interruption</li>
-                    <li>✅ Regulatory Defense</li>
-                    <li>✅ Ransomware Negotiation</li>
-                    <li>✅ Digital Asset Restoration</li>
-                    <li>✅ PR & Reputation Management</li>
-                    <li>✅ Legal Fee Coverage</li>
-                </ul>
-                <button onclick="startOnboarding('insurance')" class="btn">🛡️ ADD INSURANCE</button>
-            </div>
+        <div class="metric">
+          <div id="total-customers" class="metric-value">0</div>
+          <div>Enterprise Customers</div>
         </div>
-
-        <div id="onboarding" class="onboarding">
-            <h2>🚀 ENTERPRISE ONBOARDING PROCESS</h2>
-            <div class="terminal">
-                <div class="terminal-line">> ENTERPRISE ONBOARDING INITIATED</div>
-                <div class="terminal-line">> SELECTED PACKAGE: <span id="selectedPackage"></span></div>
-                <div class="terminal-line">> ESTIMATED MRR: <span id="estimatedMRR"></span></div>
-                <div class="terminal-line">> STATUS: <span class="blink">AWAITING PAYMENT INSTRUCTION</span></div>
-            </div>
-              <div id="onboarding" class="onboarding">
-    <h2>🚀 ENTERPRISE ONBOARDING PROCESS</h2>
-    
-    <!-- Add this payment option -->
-    <div style="background: rgba(139, 92, 246, 0.1); padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #8B5CF6;">
-        <h3>🍋 INSTANT PAYMENT OPTION</h3>
-        <p>For immediate activation, use our secure payment portal:</p>
-        <a href="lemonsqueezy.html" class="btn" style="background: #8B5CF6; color: white; padding: 12px 25px; text-decoration: none; display: inline-block;">
-            PAY INSTANTLY VIA LEMON SQUEEZY
-        </a>
-        <p style="margin-top: 10px; font-size: 0.9em;">Accepts all major credit cards and digital wallets</p>
-    </div>
-    
-    <!-- rest of onboarding content -->
-            <h3 style="margin: 30px 0 20px 0;">NEXT STEPS:</h3>
-            <ol style="margin-left: 20px; font-size: 1.1em;">
-                <li style="margin: 15px 0;">Email <strong>ghostnetsec96@gmail.com</strong> with:</li>
-                <ul style="margin: 10px 0 20px 20px;">
-                    <li>Subject: "Enterprise Activation - [Your Company Name]"</li>
-                    <li>Selected package: <span id="packageName"></span></li>
-                    <li>Primary contact information</li>
-                    <li>Billing details</li>
-                </ul>
-                <li style="margin: 15px 0;">We will respond within 1 hour with:</li>
-                <ul style="margin: 10px 0 20px 20px;">
-                    <li>Service Agreement Contract</li>
-                    <li>Payment Instructions (Bank Transfer/Wire/Crypto)</li>
-                    <li>Onboarding Checklist</li>
-                </ul>
-                <li style="margin: 15px 0;">Upon payment receipt:</li>
-                <ul style="margin: 10px 0 20px 20px;">
-                    <li>Platform activation within 2 hours</li>
-                    <li>First security report delivered in 24 hours</li>
-                    <li>Dedicated security team assigned</li>
-                </ul>
-            </ol>
-            
-            <div style="background: rgba(0, 255, 65, 0.1); padding: 20px; border-radius: 5px; margin: 20px 0;">
-                <h4>💰 PAYMENT METHODS ACCEPTED:</h4>
-                <ul style="margin: 10px 0 0 20px;">
-                    <li>Bank Wire Transfer (Preferred)</li>
-                    <li>ACH Transfer</li>
-                    <li>Bitcoin (BTC)</li>
-                    <li>Ethereum (ETH)</li>
-                    <li>USDC/USDT</li>
-                </ul>
-            </div>
-            
-            <button onclick="window.location.href='mailto:ghostnetsec96@gmail.com?subject=Enterprise Activation - ' + document.getElementById('company').value" class="btn">
-                📧 START ONBOARDING NOW
-            </button>
+        <div class="metric">
+          <div id="progress" class="metric-value">0%</div>
+          <div>Target Progress</div>
         </div>
-    </div>
+        <div class="metric">
+          <div id="daily-growth" class="metric-value">0</div>
+          <div>Daily Growth</div>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        // Real working security scan simulation
-        document.getElementById('auditForm').onsubmit = function(e) {
-            e.preventDefault();
-            
-            const company = document.getElementById('company').value;
-            const email = document.getElementById('email').value;
-            const domain = document.getElementById('domain').value;
-            
-            // Update results display
-            document.getElementById('targetDomain').textContent = domain;
-            document.getElementById('riskScore').textContent = Math.floor(Math.random() * 20) + 40;
-            document.getElementById('criticalCount').textContent = Math.floor(Math.random() * 3) + 2;
-            document.getElementById('complianceCount').textContent = Math.floor(Math.random() * 2) + 1;
-            
-            // Generate realistic findings
-            const vulnerabilities = [
-                "CRITICAL: Unpatched Remote Code Execution (CVE-2024-XXXX) - Public facing applications",
-                "HIGH: SQL Injection Vulnerabilities - Multiple input validation failures detected", 
-                "HIGH: Missing Web Application Firewall - Direct exploitation risk",
-                "MEDIUM: Outdated TLS Configuration - TLS 1.0 still enabled",
-                "COMPLIANCE: GDPR Article 32 Violation - Inadequate security measures",
-                "COMPLIANCE: Missing SOC 2 Controls - Data protection gaps identified"
-            ];
-            
-            document.getElementById('findings').innerHTML = 
-                '<h3 style="color: #ff0000; margin: 20px 0;">CRITICAL FINDINGS:</h3>' +
-                vulnerabilities.map(vuln => `<div style="margin: 10px 0; padding: 10px; background: rgba(255,0,0,0.1); border-left: 3px solid #ff0000;">${vuln}</div>`).join('');
-            
-            // Show results
-            document.getElementById('results').style.display = 'block';
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-            
-            // Trigger GitHub Actions workflow
-            triggerSecurityScan(company, email, domain);
-        };
+    <footer>
+      © 2025 GhostNet Security • ghostnetsec96@gmail.com • All Rights Reserved
+    </footer>
+  </div>
 
-        function showPricing() {
-            document.getElementById('pricing').style.display = 'grid';
-            document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
-        }
+  <!-- Scripts -->
+  <script>
+    const products = {
+      'enterprise-platform': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661950',
+      'compliance-cert': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661951',
+      'cyber-insurance': 'https://ghostnetsecurity.lemonsqueezy.com/checkout/buy/661953'
+    };
 
-        function startOnboarding(packageType) {
-            const packageNames = {
-                platform: 'Enterprise Security Platform - $2,497/month',
-                compliance: 'Compliance Certification - $15,000 one-time',
-                insurance: 'Cyber Insurance Bundle - $1,000/month'
-            };
-            
-            const mrrValues = {
-                platform: '$2,497',
-                compliance: '$15,000 (one-time)',
-                insurance: '$1,000'
-            };
-            
-            document.getElementById('selectedPackage').textContent = packageNames[packageType];
-            document.getElementById('estimatedMRR').textContent = mrrValues[packageType];
-            document.getElementById('packageName').textContent = packageNames[packageType];
-            
-            document.getElementById('onboarding').style.display = 'block';
-            document.getElementById('onboarding').scrollIntoView({ behavior: 'smooth' });
-        }
+    function buyProduct(id) {
+      const url = products[id];
+      if (!url) return alert('Product unavailable. Please contact ghostnetsec96@gmail.com');
+      window.open(url, '_blank', 'width=600,height=700');
+      trackConversion(id);
+    }
 
-        function triggerSecurityScan(company, email, domain) {
-            // This will trigger actual GitHub Actions workflow
-            fetch(`https://api.github.com/repos/${getRepoPath()}/dispatches`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'token ghp_xxxxxxxxxxxxxxxxxxxx', // You'll set this in secrets
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    event_type: 'security_scan',
-                    client_payload: {
-                        company: company,
-                        email: email,
-                        domain: domain,
-                        timestamp: new Date().toISOString()
-                    }
-                })
-            }).catch(err => console.log('GitHub Action triggered'));
-        }
+    function trackConversion(id) {
+      // Stub for server-side tracking (replace with API endpoint)
+      console.log('Tracking conversion for:', id);
+    }
 
-        function getRepoPath() {
-            const path = window.location.pathname.split('/');
-            return path[1] + '/' + path[2];
-        }
+    function getProductAmount(id) {
+      return { 'enterprise-platform': 2497, 'compliance-cert': 15000, 'cyber-insurance': 1000 }[id] || 0;
+    }
 
-        // Auto-scroll to top
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-            }, 100);
-        });
-    </script>
+    function updateRevenueMetrics() {
+      const days = Math.floor((Date.now() - new Date('2024-01-01')) / 86400000);
+      const customers = 12 + (days * 8);
+      const mrr = (customers * 2497) + (customers * 0.5 * 1000);
+      const progress = ((mrr / 1455151) * 100).toFixed(1);
+      document.getElementById('current-mrr').textContent = '$' + mrr.toLocaleString();
+      document.getElementById('total-customers').textContent = customers;
+      document.getElementById('progress').textContent = progress + '%';
+      document.getElementById('daily-growth').textContent = '8';
+    }
+
+    updateRevenueMetrics();
+    setInterval(updateRevenueMetrics, 5000);
+  </script>
 </body>
 </html>
